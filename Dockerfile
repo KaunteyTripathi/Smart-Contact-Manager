@@ -17,7 +17,7 @@ COPY src ./src
 RUN ./mvnw clean package -DskipTests
 
 # Stage 2: Run the jar
-FROM eclipse-temurin:21-jdk-slim
+FROM eclipse-temurin:21-jdk  # Use the full JDK image, slim not available
 
 WORKDIR /app
 
