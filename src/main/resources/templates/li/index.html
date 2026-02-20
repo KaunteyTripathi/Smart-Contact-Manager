@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="li/base::Layout(~{::section})">
+
+<section class="dashboard-bg">
+
+<div class="lottie-wrapper">
+                            <dotlottie-wc
+  src="https://lottie.host/e5687696-4593-46f8-9e43-7f123a0b873a/7lYvJlutNz.lottie"
+  style="width: 300px;height: 300px"
+  autoplay
+  loop
+></dotlottie-wc></div>
+  <!-- ===== WELCOME ===== -->
+  <div class="welcome-box text-center">
+    <h2>Welcome, <span th:text="${user.name}"></span> 👋</h2>
+    <p class="text-muted">Manage your contacts efficiently and stay organized</p>
+  </div>
+
+  <!-- ===== STATS ===== -->
+  <div class="stats-container">
+
+    <div class="stat-card">
+      <h3 th:text="${totalContacts}"></h3>
+      <p>Total Contacts</p>
+    </div>
+
+    <div class="stat-card">
+      <h3 th:text="${user.role}"></h3>
+      <p>Role</p>
+    </div>
+
+    <div class="stat-card">
+      <h3 th:text="${recentCount}"></h3>
+      <p>Added Recently</p>
+    </div>
+
+  </div>
+
+  <!-- ===== QUICK ACTIONS ===== -->
+  <div class="actions-container">
+
+    <a th:href="@{/user/addcontact}" class="action-btn">➕ Add Contact</a>
+
+    <a th:href="@{/user/viewcontact/0}" class="action-btn">📒 View Contacts</a>
+
+    <a th:href="@{/user/profile}" class="action-btn">👤 My Profile</a>
+
+  </div>
+
+  <!-- ===== CSS ===== -->
+  <style>
+    .dashboard-bg {
+  min-height: calc(100vh - 56px); /* full area under navbar */
+  width: 100%;
+  padding: 20px;   /* smaller padding */
+  background: linear-gradient(120deg, #5f9cff, #7b5cff);
+  margin: 0;       /* important */
+}
+.lottie-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+    .welcome-box {
+      margin-bottom: 30px;
+    }
+
+    .stats-container {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: rgba(255,255,255,0.15);
+      padding: 20px 30px;
+      border-radius: 12px;
+      text-align: center;
+      min-width: 160px;
+      backdrop-filter: blur(8px);
+    }
+
+    .stat-card h3 {
+      font-size: 28px;
+      margin-bottom: 5px;
+    }
+
+    .actions-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .action-btn {
+      background: white;
+      color: #5f9cff;
+      padding: 12px 22px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-2px);
+      background: #f1f1f1;
+    }
+  </style>
+
+</section>
+</html>

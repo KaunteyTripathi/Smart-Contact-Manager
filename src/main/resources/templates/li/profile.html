@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="li/base::Layout(~{::section})">
+<head>
+<title>hii</title>
+</head>
+
+<body>
+<!--<section>
+
+  
+    <form>
+    
+   
+   
+
+    <span class="content container mt-4">  <h2 class="text-center">Your Contacts</h2></span>
+   <div class="text-center"><img class="pic" th:src="@{'/img/'+${contact.image}}" alt="profile"/></div>
+      <div class="text-center">
+        <label class="text-center">Name</label>
+        <input type="text"
+       th:value="${contact.name}"
+       name="secondName"
+       class="form-control"
+       placeholder="Enter Second Name"></div>
+       
+
+    </form>
+
+
+</section>-->
+
+<!--<section class="py-4">
+
+   ===== CSS ===== 
+  <style>
+    .mini-profile-card {
+      width: 340px;
+      border-radius: 12px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .profile-header {
+      padding: 20px;
+      background: linear-gradient(135deg, #4e73df, #6f42c1);
+      color: white;
+    }
+
+    .mini-avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      border: 4px solid rgba(255,255,255,0.8);
+      object-fit: cover;
+      transition: transform .3s ease;
+    }
+
+    .mini-avatar:hover {
+      transform: scale(1.05);
+    }
+
+    .profile-body {
+      padding: 15px 18px;
+    }
+
+    .info-row {
+      margin-bottom: 12px;
+    }
+
+    .info-row span {
+      font-size: 11px;
+      color: #888;
+    }
+
+    .info-row p {
+      margin: 0;
+      font-weight: 500;
+      font-size: 14px;
+    }
+  </style>
+
+   ===== HTML ===== 
+  <div class="d-flex justify-content-center">
+
+    <div class="mini-profile-card shadow-sm">
+
+      <div class="text-center profile-header">
+
+        <img class="mini-avatar"
+             th:src="@{'/img/' + ${contact.image}}"
+             alt="profile">
+
+        <h5 class="mt-2 mb-0"
+            th:text="${contact.name + ' ' + contact.secondName}"></h5>
+
+        <small class="text-light"
+               th:text="${contact.work}"></small>
+
+      </div>
+
+      <div class="profile-body">
+
+        <div class="info-row">
+          <span>Email</span>
+          <p th:text="${contact.email}"></p>
+        </div>
+
+        <div class="info-row">
+          <span>Phone</span>
+          <p th:text="${contact.phone}"></p>
+        </div>
+
+        <div class="info-row">
+          <span>Description</span>
+          <p th:text="${contact.description}"></p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+   ===== JS ===== 
+  <script>
+    console.log("Mini profile loaded");
+
+    // Example micro interaction
+    document.querySelectorAll(".mini-profile-card")
+      .forEach(card => {
+        card.addEventListener("mouseenter", () => {
+          card.style.transform = "translateY(-2px)";
+          card.style.transition = "0.2s";
+        });
+
+        card.addEventListener("mouseleave", () => {
+          card.style.transform = "translateY(0)";
+        });
+      });
+  </script>
+
+</section>-->
+
+<section class="profile-bg">
+
+
+<div class="bg-bubbles">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+
+  <!-- ====== MINI PROFILE CARD ====== -->
+  <div class="mini-profile-card shadow-sm">
+
+    <div class="text-center profile-header">
+      <img class="mini-avatar"
+           th:src="@{'/img/' + ${contact.image}}"
+           alt="profile">
+
+      <h5 class="mt-2 mb-0"
+          th:text="${contact.name + ' ' + contact.secondName}"></h5>
+
+      <small class="text-muted"
+             th:text="${contact.work}"></small>
+    </div>
+
+    <div class="profile-body">
+      <div class="info-row">
+        <span>Email</span>
+        <p th:text="${contact.email}"></p>
+      </div>
+
+      <div class="info-row">
+        <span>Phone</span>
+        <p th:text="${contact.phone}"></p>
+      </div>
+
+      <div class="info-row">
+        <span>Description</span>
+        <p th:text="${contact.description}"></p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ====== FLOATING PARTICLES ====== -->
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- ====== CSS ====== -->
+  <style>
+    .profile-bg {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+
+      /* Animated Gradient */
+      background: linear-gradient(270deg, #5f9cff, #7b5cff, #00c6ff);
+      background-size: 600% 600%;
+      animation: gradientMove 15s ease infinite;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    #bgCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .mini-profile-card {
+      position: relative;
+      z-index: 2;
+      width: 340px;
+      border-radius: 16px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .profile-header {
+      padding: 30px 20px;
+      background: linear-gradient(135deg, #5f9cff, #7b5cff);
+      color: white;
+    }
+
+    .mini-avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      border: 4px solid rgba(255,255,255,0.8);
+      object-fit: cover;
+    }
+
+    .profile-body {
+      padding: 20px;
+    }
+
+    .info-row span {
+      font-size: 12px;
+      color: #888;
+    }
+
+    .info-row p {
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+  </style>
+
+  <!-- ====== JS PARTICLES ====== -->
+  <script>
+    const canvas = document.getElementById("bgCanvas");
+    const ctx = canvas.getContext("2d");
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    const particles = [];
+    const particleCount = 60;
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 2 + 1,
+        dx: (Math.random() - 0.5) * 0.5,
+        dy: (Math.random() - 0.5) * 0.5
+      });
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "rgba(255,255,255,0.6)";
+      particles.forEach(p => {
+        p.x += p.dx;
+        p.y += p.dy;
+
+        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+
+</section>
+
+
+</body>
+</html>

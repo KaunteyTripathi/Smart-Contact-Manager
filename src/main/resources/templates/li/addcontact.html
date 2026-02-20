@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="li/base::Layout(~{::section})">
+<head>
+<title>hii</title>
+</head>
+
+<body>
+<section>
+
+<div class="bg-bubbles">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+
+
+  <div class="content container mt-4">
+    <h2>Add Contact</h2>
+
+    <form class="mt-4 col-md-5 " th:action="@{/user/addcontact}"
+            th:object="${contact}"
+            method="post"
+            enctype="multipart/form-data"
+            >
+
+      <div class="mb-2">
+        <label class="form-label">Contact Name</label>
+        <!--<input type="text" name= "name" class="form-control" placeholder="Enter First Name">-->
+        
+        <input type="text" th:field="*{name}" class="form-control">
+
+<div class="text-danger"
+     th:if="${#fields.hasErrors('name')}"
+     th:errors="*{name}">
+</div>
+      </div>
+
+      <div class="mb-2">
+        <label class="form-label">Nick Name</label>
+        <input type="text" name= "secondName" class="form-control" placeholder="Enter Second Name">
+      </div>
+
+      <div class="mb-2" >
+        <label class="form-label">Phone</label>
+        <input type="text" name="phone" class="form-control" placeholder="Enter Contact Number">
+      </div>
+
+      <div class="mb-2">
+        <label class="form-label">Email</label>
+        <input type="email" name="email" class="form-control" placeholder="Enter Email Address">
+      </div>
+
+      <div class="mb-2">
+        <label class="form-label">Work</label>
+        <input type="text" name="work"class="form-control" placeholder="Enter Work Experience">
+      </div>
+      <div class="mb-2">
+        <label class="form-label">Description</label>
+        <input type="text" name="description"class="form-control" placeholder="Description">
+      </div>
+      
+      <div class="custom-file">
+        
+        <input type="file" name="file">
+      </div>
+      
+      
+      <button class="btn btn-primary mt-2">Save Contact</button>
+    </form>
+
+  </div>
+
+</section></body>
+</html>

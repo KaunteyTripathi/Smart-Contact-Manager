@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="base::Layout(~{::section})">
+
+<section class="banner d-flex justify-content-center align-items-center text-center">
+  <div>
+  <div class="bg-bubbles">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  
+    <h1 class="fw-bold text-white">
+      Description 
+    </h1>
+
+    <p class="text-white mt-3 mb-4">
+      Hi this Application will help you save your contacts
+      
+      we are providing you services to store multiple contacts and fetch them whenever you need .
+    </p>
+
+    <a th:href="@{/}" class="btn btn-primary btn-lg">
+      Go Back
+    </a>
+  </div>
+</section>
+
+</html>

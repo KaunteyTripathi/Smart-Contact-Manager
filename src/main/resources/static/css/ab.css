@@ -1,0 +1,41 @@
+.mini-profile-card {
+  width: 340px;          /* small card */
+  border-radius: 12px;
+  background: #fff;
+  overflow: hidden;
+}
+
+/* HEADER */
+.profile-header {
+  padding: 20px;
+  background: linear-gradient(135deg, #4e73df, #6f42c1);
+  color: white;
+}
+
+.mini-avatar {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 4px solid rgba(255,255,255,0.8);
+  object-fit: cover;
+}
+
+/* BODY */
+.profile-body {
+  padding: 15px 18px;
+}
+
+.info-row {
+  margin-bottom: 12px;
+}
+
+.info-row span {
+  font-size: 11px;
+  color: #888;
+}
+
+.info-row p {
+  margin: 0;
+  font-weight: 500;
+  font-size: 14px;
+}

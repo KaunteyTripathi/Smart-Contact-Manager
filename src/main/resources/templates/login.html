@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::Layout(~{::section})">
+
+
+<head>
+  <meta charset="UTF-8">
+  <title>Login Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+
+<section class="login-section d-flex justify-content-center align-items-center">
+
+<div class="bg-bubbles">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+
+    <div class="container">
+    
+    
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+            
+            
+                <div class="login-card shadow-lg">
+                    <div class="row g-0 align-items-center">
+              
+              
+              
+             <div th:if="${param.error}" class="alert alert-danger">
+    Invalid username or password
+</div>
+		
+		
+                        <!-- Left Image -->
+                        <div class="col-md-6 text-center p-4">
+                            <dotlottie-wc
+  src="https://lottie.host/a58f7854-02a8-4ca0-a1d7-9fffe91d03e2/udYZwu9ntl.lottie"
+  style="width: 300px;height: 300px"
+  autoplay
+  loop
+></dotlottie-wc>
+                        </div>
+
+                        <!-- Right Form -->
+                        <div class="col-md-6 p-5">
+                            <h2 class="mb-4 fw-bold">Login Here</h2>
+
+                           <form th:action="@{/login}" method="post">
+
+    <div class="mb-3 icon-input">
+        <i class="bi bi-person input-icon"></i>
+        <input type="email"
+               name="username"
+               class="form-control ps-5"
+               placeholder="Email"
+               required />
+    </div>
+
+    <div class="mb-3 icon-input">
+        <i class="bi bi-lock input-icon"></i>
+        <input type="password"
+               name="password"
+               class="form-control ps-5"
+               placeholder="Password"
+               required />
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">
+        Log in
+    </button>
+
+</form>
+
+
+
+                            <div class="mt-4 text-center">
+                                <a th:href="@{/sign}">Create an account</a>
+
+                                <p class="text-muted mt-3">Or login with</p>
+                                <div class="social-icons">
+                                    <a class="facebook">f</a>
+                                    <a class="twitter">t</a>
+                                    <a class="google">G</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+</body>
+</html>

@@ -1,0 +1,590 @@
+/*body{
+	background: #e2e2e2!important;
+}
+
+.bg-primary{
+    background: #009688 ! important;
+}
+
+.banner{
+	
+	width:100%;
+	height:93vh;
+	background:linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8)),url(../img/am.jpeg);
+	background-size:cover;
+
+}
+
+.login-section {
+    min-height: 100vh;
+    background-color: #f5f6fa;
+}
+
+.login-card {
+    background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.form-control {
+    height: 45px;
+    border-radius: 25px;
+}
+
+.input-icon {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    color: #999;
+}
+
+.btn-primary {
+    border-radius: 25px;
+    padding: 10px;
+}
+
+.social-icons a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50%;
+    color: #fff;
+    margin: 0 5px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.social-icons .facebook {
+    background: #3b5998;
+}
+
+.social-icons .twitter {
+    background: #55acee;
+}
+
+.social-icons .google {
+    background: #dd4b39;
+}
+
+ ===== SIGNUP BACKGROUND ===== 
+.signup-section {
+  min-height: 100vh;
+  background: linear-gradient(#ADD8E6, #eef2ff, #f9fafc);
+  display: flex;
+  align-items: center;
+}
+
+ ===== CARD ===== 
+.login-card {
+  background: linear-gradient(135deg, #ffffff, #f1f5f9);
+  border-radius: 18px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+  max-width: 600px;
+}
+
+ ===== FORM ===== 
+.login-form h2 {
+  font-weight: 700;
+}
+
+.form-control {
+  border-radius: 10px;
+  padding-left: 40px;
+}
+
+.form-icon {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  color: #6b7280;
+}
+
+ ===== EDITOR ===== 
+.editor-box {
+  height: 120px;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+ ===== BUTTONS ===== 
+.btn-submit {
+  background: linear-gradient(135deg, #4f46e5, #3b82f6);
+  color: #fff;
+  border-radius: 10px;
+  font-weight: 600;
+  border: none;
+  transition: 0.3s;
+}
+
+.btn-submit:hover {
+  background: linear-gradient(135deg, #4338ca, #2563eb);
+  transform: translateY(-1px);
+}
+
+.btn-reset {
+  background: #e5e7eb;
+  color: #374151;
+  border-radius: 10px;
+  font-weight: 600;
+  border: none;
+  transition: 0.3s;
+}
+
+.btn-reset:hover {
+  background: #d1d5db;
+}
+
+
+
+
+
+
+
+ ===== SIDEBAR===== 
+.sidebar{
+	width: 18%;
+	background:white;
+	height:100%;
+	position:fixed;
+	padding-top:45px;
+	
+}
+
+.content{
+	background:white;
+	margin-left:19%;
+	height:100%;
+	position:fixed;
+	Width:100%;
+	
+	
+}
+ =====item===== 
+.sidebar a{
+	
+	display:block;
+	width: 100%;
+	padding: 10px 25px;
+	color:gray;
+	
+	
+	
+}
+
+.sidebar a:hover{
+	background:#e2e2e2;
+	color:white;
+}
+
+.sidebar .divider
+
+
+{
+	
+	height:.5px;
+	width:100px;
+	background:#e2e2e2;
+	margin-top:10px;
+}
+
+
+ ===== item ===== 
+ ===== RESPONSIVE ===== 
+@media (max-width: 576px) {
+  .btn-submit,
+  .btn-reset {
+    width: 100% !important;
+  }
+
+  dotlottie-wc {
+    width: 150px !important;
+    height: 150px !important;
+  }
+}
+ ===== RICH TEXT EDITOR ===== 
+.editor-box {
+  min-height: 130px;
+  padding: 10px;
+  overflow-y: auto;
+  cursor: text;
+}
+
+ Placeholder text 
+.editor-box:empty::before {
+  content: attr(data-placeholder);
+  color: #9ca3af;
+}
+
+ Toolbar spacing 
+.editor-toolbar button {
+  min-width: 36px;
+}
+
+.sidebar .cross-btn{ position:absolute;
+         top: 0;
+         right: 35px;
+         font-size: 36px;
+         
+         cursor: pointer;
+	
+	
+}*/
+
+/* ===== GLOBAL ===== */
+
+
+body{
+    background: #e2e2e2 !important;
+}
+
+.bg-primary{
+    background: #009688 !important;
+}
+
+
+.pic{
+	
+	width:100px;
+	height:100px;
+	object-fit:cover;
+	border-radius:50%;
+	text-align:center;
+	
+	
+}
+/* ===== HERO / BANNER ===== */
+.banner{
+    width:100%;
+    height:93vh;
+    background:linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8)),url(../img/am.jpeg);
+    background-size:cover;
+    background-position:center;
+}
+
+/* ===== LOGIN ===== */
+.login-section {
+    min-height: 100vh;
+    background-color: #f5f6fa;
+}
+
+.login-card {
+    background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    max-width: 600px;
+    margin: auto;
+}
+
+
+
+/* ===== FORM ===== */
+.form-control {
+    height: 45px;
+    border-radius: 25px;
+    padding-left: 40px;
+}
+
+.input-icon,
+.form-icon {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    color: #999;
+}
+
+.btn-primary {
+    border-radius: 25px;
+    padding: 10px;
+}
+
+/* ===== SOCIAL ===== */
+.social-icons a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50%;
+    color: #fff;
+    margin: 0 5px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.social-icons .facebook { background: #3b5998; }
+.social-icons .twitter { background: #55acee; }
+.social-icons .google { background: #dd4b39; }
+
+/* ===== SIGNUP ===== */
+.signup-section {
+  min-height: 100vh;
+  background: linear-gradient(#ADD8E6, #eef2ff, #f9fafc);
+  display: flex;
+  align-items: center;
+}
+
+/* ===== CARD ===== */
+.login-card {
+  background: linear-gradient(135deg, #ffffff, #f1f5f9);
+  border-radius: 18px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+}
+
+/* ===== EDITOR ===== */
+.editor-box {
+  min-height: 130px;
+  padding: 10px;
+  overflow-y: auto;
+  cursor: text;
+}
+
+.editor-box:empty::before {
+  content: attr(data-placeholder);
+  color: #9ca3af;
+}
+
+.editor-toolbar button {
+  min-width: 36px;
+}
+
+/* ===== BUTTONS ===== */
+.btn-submit {
+  background: linear-gradient(135deg, #4f46e5, #3b82f6);
+  color: #fff;
+  border-radius: 10px;
+  font-weight: 600;
+  border: none;
+  transition: 0.3s;
+}
+
+.btn-submit:hover {
+  background: linear-gradient(135deg, #4338ca, #2563eb);
+  transform: translateY(-1px);
+}
+
+.btn-reset {
+  background: #e5e7eb;
+  color: #374151;
+  border-radius: 10px;
+  font-weight: 600;
+  border: none;
+  transition: 0.3s;
+}
+
+.btn-reset:hover {
+  background: #d1d5db;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar{
+    width: 240px;
+    background: linear-gradient(
+    135deg,
+    rgba(99,102,241,0.18),
+    rgba(236,72,153,0.14)
+  );
+    height:100vh;
+    position:fixed;
+    padding-top:45px;
+    transition: 0.3s;
+}
+.lottie-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.test-css {
+  border: 5px solid red;
+}
+
+dotlottie-wc {
+  width: 300px;
+  height: 300px;
+  display: block;
+}
+
+/* ===== CONTENT ===== */
+.content {
+    margin-left: 250px;                /* sidebar width */
+    padding: 20px;
+    min-height: calc(100vh - 56px);    /* full height minus navbar */
+
+    /* ⭐ SAME AS DASHBOARD */
+    background: linear-gradient(120deg, #5f9cff, #7b5cff);
+    color: white; /* optional — dashboard uses white text */
+}
+/* ===== SIDEBAR ITEMS ===== */
+.sidebar a{
+    display:block;
+    width: 100%;
+    padding: 10px 25px;
+    color:gray;
+}
+
+.sidebar a:hover{
+    background:#e2e2e2;
+    color:#000;
+}
+
+.sidebar .divider{
+    height:.5px;
+    width:100%;
+    background:#e2e2e2;
+    margin-top:10px;
+}
+
+.sidebar .cross-btn{
+    position:absolute;
+    top:0;
+    right:20px;
+    font-size:30px;
+    cursor:pointer;
+}
+
+/* ========================= */
+/* ===== TABLET (≤ 992px) ==== */
+/* ========================= */
+@media (max-width: 992px){
+
+  .sidebar{
+      width:200px;
+  }
+
+  .content{
+      margin-left:200px;
+  }
+
+  .banner{
+      height:70vh;
+  }
+}
+
+/* ========================= */
+/* ===== MOBILE (≤ 768px) ==== */
+/* ========================= */
+@media (max-width: 768px){
+
+  .sidebar{
+      left:-240px;
+  }
+
+  .sidebar.active{
+      left:0;
+  }
+
+  .content{
+      margin-left:0;
+  }
+
+  .banner{
+      height:60vh;
+  }
+
+  .login-card{
+      margin:20px;
+  }
+}
+
+/* ========================= */
+/* ===== SMALL MOBILE (≤ 576px) ==== */
+/* ========================= */
+@media (max-width: 576px){
+
+  .btn-submit,
+  .btn-reset {
+    width: 100%;
+  }
+
+  dotlottie-wc {
+    width:150px !important;
+    height:150px !important;
+  }
+
+  .banner{
+      height:50vh;
+  }
+}
+
+
+
+/**************************/
+.login-section{
+  position: relative;
+  min-height: 100vh;
+
+  background: linear-gradient(
+    135deg,
+    rgba(99,102,241,0.18),
+    rgba(236,72,153,0.14)
+  );
+}
+
+
+
+/* Wrapper */
+.login-bg{
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(135deg,#eef2ff,#f8fafc);
+}
+
+/* Keep form above bubbles */
+.login-content{
+  position: relative;
+  z-index: 2;
+}
+
+/* Floating bubbles container */
+.bg-bubbles{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none; /* ⭐ FIX — allows clicking through */
+}
+
+/* Bubble style */
+.bg-bubbles span{
+  position:absolute;
+  display:block;
+  width:120px;
+  height:120px;
+  background:rgba(99,102,241,0.15);
+  border-radius:50%;
+  animation: float 18s linear infinite;
+  bottom:-150px;
+}
+
+/* Different sizes & speeds */
+.bg-bubbles span:nth-child(1){ left:10%; animation-duration:20s;}
+.bg-bubbles span:nth-child(2){ left:30%; width:80px;height:80px; animation-duration:14s;}
+.bg-bubbles span:nth-child(3){ left:55%; animation-duration:22s;}
+.bg-bubbles span:nth-child(4){ left:75%; width:60px;height:60px; animation-duration:12s;}
+.bg-bubbles span:nth-child(5){ left:90%; animation-duration:18s;}
+
+/* Animation */
+@keyframes float{
+  0%{ transform:translateY(0) rotate(0deg);}
+  100%{ transform:translateY(-1200px) rotate(360deg);}
+}
+
+.page-bg{
+  min-height:100vh;
+  padding:20px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(99,102,241,0.18),
+    rgba(236,72,153,0.14)
+  );
+
+  border-radius:5px;
+}
+
+
+

@@ -1,0 +1,29 @@
+# Maven / Gradle build
+target/
+build/
+
+# Logs
+*.log
+
+# Compiled class
+*.class
+
+# Package files
+*.jar
+*.war
+*.ear
+
+# Eclipse / STS
+.project
+.classpath
+.settings/
+.springBeans
+.sts4-cache/
+
+# IDE
+.idea/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
