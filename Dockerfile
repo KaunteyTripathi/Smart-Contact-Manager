@@ -1,5 +1,5 @@
 # Use lightweight JDK 21 image
-FROM openjdk:21
+FROM eclipse-temurin:21-jdk
 
 # Set working directory
 WORKDIR /app
