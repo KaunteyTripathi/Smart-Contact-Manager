@@ -82,19 +82,25 @@ const search = () => {
         return;
     }
 
-    let url = `http://localhost:8282/user/search/${query}`;
+    // ✅ Use relative URL (no localhost)
+    let url = `/user/search/${query}`;
 
     fetch(url)
         .then(response => response.json())
         .then(data => {
+
             let text = `<div class='list-group'>`;
+
             data.forEach(contact => {
                 text += `
-                    <a href='https://smart-contact-manager-production-c803.up.railway.app/user/contact/${contact.cId}' class='list-group-item list-group-item-action'>
+                    <a href='/user/contact/${contact.cId}'
+                       class='list-group-item list-group-item-action'>
                         ${contact.name}
                     </a>`;
             });
+
             text += `</div>`;
+
             $(".search-result").html(text);
             $(".search-result").show();
         })
