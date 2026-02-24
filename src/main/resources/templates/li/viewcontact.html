@@ -23,6 +23,11 @@
 
 <h1 class="text-center"> Your Contacts</h1></div>
 
+<!-- Search box -->
+        <div class="search-container my-4">
+            <input onkeyup="search()" id="search-input" type="text" class="form-control" placeholder="Search your contacts" />
+            <div class="search-result"></div>
+        </div>
 
 <table class="table">
   <thead>
@@ -48,7 +53,7 @@
      <th scope="row" th:text="${'SCMUSER2026'+c.cId}"></th>
       <td > 
       
-      <img class="pic" th:src="@{'/img/'+${c.image}}" alt="profile"/>
+      <img class="pic" th:src="${c.image}" alt="profile"/>
       
       
       <span th:text="${c.name}"></span></td>

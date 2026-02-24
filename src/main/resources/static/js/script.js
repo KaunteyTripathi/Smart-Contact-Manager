@@ -71,3 +71,32 @@ const toogleSidebar = () =>{
 	}
 	
 }
+
+
+const search = () => {
+
+    let query = $("#search-input").val();
+
+    if (query === "") {
+        $(".search-result").hide();
+        return;
+    }
+
+    let url = `http://localhost:8282/user/search/${query}`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            let text = `<div class='list-group'>`;
+            data.forEach(contact => {
+                text += `
+                    <a href='/user/contact/${contact.cId}' class='list-group-item list-group-item-action'>
+                        ${contact.name}
+                    </a>`;
+            });
+            text += `</div>`;
+            $(".search-result").html(text);
+            $(".search-result").show();
+        })
+        .catch(error => console.error(error));
+};

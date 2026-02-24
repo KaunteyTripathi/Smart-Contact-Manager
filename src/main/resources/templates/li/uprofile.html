@@ -22,7 +22,7 @@
 
       <!-- Default image -->
       <img class="profile-avatar"
-           th:src="@{'/img/' + ${user.imageUrl != null ? user.imageUrl : 'am.jpeg'}}"
+           th:src="${user.imageUrl != null ? user.imageUrl : 'https://res.cloudinary.com/ddxtareaf/image/upload/v1771958073/79866935-7904-46DC-96BE-8D9CD0347DF2_2_wdrdas.jpg'}"
            alt="profile">
 
       <h3 class="mt-3" th:text="${user.name}"></h3>

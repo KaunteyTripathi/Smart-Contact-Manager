@@ -1,7 +1,7 @@
 package com.smart.controller;
 
-import java.io.File;
 import java.security.Principal;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Helper.Message;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.smart.dao.contactRepository;
 import com.smart.dao.userRepository;
 import com.smart.entities.Contact;
@@ -34,6 +36,9 @@ public class UserController {
 	private userRepository UserRepository;
 	@Autowired
 	private contactRepository contactRepository;
+
+	@Autowired
+	private Cloudinary cloudinary;
 
 	@ModelAttribute
 	private void commondata(Model model, Principal p) {
@@ -87,30 +92,39 @@ public class UserController {
 			String username = principal.getName();
 			User user = this.UserRepository.getUserByUserName(username);
 
-			// 🔹 Image Upload Logic
+			/*
+			 * // 🔹 Image Upload Logic if (file != null && !file.isEmpty()) {
+			 * 
+			 * // Unique filename String fileName = System.currentTimeMillis() + "_" +
+			 * file.getOriginalFilename(); contact.setImage(fileName);
+			 * 
+			 * // Path to src/main/resources/static/img String uploadDir =
+			 * System.getProperty("user.dir") + "/src/main/resources/static/img/";
+			 * 
+			 * File uploadPath = new File(uploadDir);
+			 * 
+			 * // Create folder if not exists if (!uploadPath.exists()) {
+			 * uploadPath.mkdirs(); }
+			 * 
+			 * // Save file File saveFile = new File(uploadPath, fileName);
+			 * file.transferTo(saveFile);
+			 * 
+			 * } else { // Default image contact.setImage("am.jpeg"); }
+			 */
 			if (file != null && !file.isEmpty()) {
 
-				// Unique filename
-				String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-				contact.setImage(fileName);
+				Map uploadResult = cloudinary.uploader().upload(file.getBytes(),
+						ObjectUtils.asMap("folder", "smart-contact"));
 
-				// Path to src/main/resources/static/img
-				String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/img/";
+				// store URL in DB
+				String imageUrl = uploadResult.get("secure_url").toString();
+				String publicId = uploadResult.get("public_id").toString();
 
-				File uploadPath = new File(uploadDir);
-
-				// Create folder if not exists
-				if (!uploadPath.exists()) {
-					uploadPath.mkdirs();
-				}
-
-				// Save file
-				File saveFile = new File(uploadPath, fileName);
-				file.transferTo(saveFile);
+				contact.setImage(imageUrl); // for display
+				// contact.setImagePublicId(publicId); // for delete/update later
 
 			} else {
-				// Default image
-				contact.setImage("am.jpeg");
+				contact.setImage("https://res.cloudinary.com/demo/image/upload/default.png");
 			}
 
 			// 🔹 Set relationship
@@ -170,22 +184,12 @@ public class UserController {
 	@GetMapping("/delete/{cid}")
 	public String delete(@PathVariable("cid") Integer cId, Principal p) {
 
-		Contact contact = this.contactRepository.findById(cId).get();
-
-		// 🔹 Delete image from folder
-		String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/img/";
-		File uploadPath = new File(uploadDir);
-
-		String image = contact.getImage();
-		if (image != null && !image.equals("am.jpeg")) {
-			File file = new File(uploadPath, image);
-			if (file.exists()) {
-				file.delete();
-			}
-		}
+		Contact contact = this.contactRepository.findById(cId)
+				.orElseThrow(() -> new RuntimeException("Contact not found"));
 
 		User user = this.UserRepository.getUserByUserName(p.getName());
 		user.getContacts().remove(contact);
+
 		this.UserRepository.save(user);
 
 		return "redirect:/user/viewcontact/0";
@@ -201,43 +205,21 @@ public class UserController {
 
 	// update handler
 	@PostMapping("/process-update")
-	public String processupdate(@ModelAttribute Contact contact, Principal p, @RequestParam("file") MultipartFile file,
-			RedirectAttributes redirectAttributes) {
-
-		System.out.println("Contact " + contact);
+	public String processupdate(@ModelAttribute Contact contact, Principal p,
+			@RequestParam("file") MultipartFile file) {
 
 		try {
 
-			// 🔹 old contact details
+			// 🔹 get old contact
 			Contact oldcontactDetail = this.contactRepository.findById(contact.getcId()).get();
 
-			// Path to image directory
-			String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/img/";
-			File uploadPath = new File(uploadDir);
-
-			// 🔹 If new image uploaded
+			// 🔹 If new image uploaded → upload to Cloudinary
 			if (file != null && !file.isEmpty()) {
 
-				// 👉 DELETE OLD IMAGE (if not default)
-				String oldImage = oldcontactDetail.getImage();
-				if (oldImage != null && !oldImage.equals("am.jpeg")) {
+				Map uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
 
-					File oldFile = new File(uploadPath, oldImage);
-					if (oldFile.exists()) {
-						oldFile.delete();
-					}
-				}
-
-				// 👉 Save new image
-				String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-				contact.setImage(fileName);
-
-				if (!uploadPath.exists()) {
-					uploadPath.mkdirs();
-				}
-
-				File saveFile = new File(uploadPath, fileName);
-				file.transferTo(saveFile);
+				String imageUrl = uploadResult.get("secure_url").toString();
+				contact.setImage(imageUrl);
 
 			} else {
 				// keep old image
@@ -246,10 +228,11 @@ public class UserController {
 
 			User user = this.UserRepository.getUserByUserName(p.getName());
 			contact.setUser(user);
+
 			this.contactRepository.save(contact);
 
 		} catch (Exception e) {
-			e.printStackTrace(); // log error
+			e.printStackTrace();
 		}
 
 		return "redirect:/user/viewcontact/0";

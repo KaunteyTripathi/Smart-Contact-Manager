@@ -76,7 +76,7 @@
       <div class="custom-file">
         
         <input type="file" th:value="${contact.image}" name="file">
-        <img class="pic" th:src="@{'/img/'+${contact.image}}" alt="profile"/>
+        <img class="pic" th:src="${contact.image}" alt="profile"/>
       </div>
       
       
