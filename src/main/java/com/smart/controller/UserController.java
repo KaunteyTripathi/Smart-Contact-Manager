@@ -80,67 +80,47 @@ public class UserController {
 			Principal principal, @RequestParam("file") MultipartFile file, Model model,
 			RedirectAttributes redirectAttributes) {
 
-		// ❗ If validation fails
+		// ❗ Validation check
 		if (result.hasErrors()) {
 			model.addAttribute("message", new Message("Form has errors. Contact NOT saved!", "danger"));
-			return "li/addcontact"; // stay on same page
+			return "li/addcontact";
 		}
 
 		try {
 
-			// 🔹 Get logged in user
+			// 🔹 Logged-in user
 			String username = principal.getName();
 			User user = this.UserRepository.getUserByUserName(username);
 
-			/*
-			 * // 🔹 Image Upload Logic if (file != null && !file.isEmpty()) {
-			 * 
-			 * // Unique filename String fileName = System.currentTimeMillis() + "_" +
-			 * file.getOriginalFilename(); contact.setImage(fileName);
-			 * 
-			 * // Path to src/main/resources/static/img String uploadDir =
-			 * System.getProperty("user.dir") + "/src/main/resources/static/img/";
-			 * 
-			 * File uploadPath = new File(uploadDir);
-			 * 
-			 * // Create folder if not exists if (!uploadPath.exists()) {
-			 * uploadPath.mkdirs(); }
-			 * 
-			 * // Save file File saveFile = new File(uploadPath, fileName);
-			 * file.transferTo(saveFile);
-			 * 
-			 * } else { // Default image contact.setImage("am.jpeg"); }
-			 */
+			// 🔹 IMAGE LOGIC
 			if (file != null && !file.isEmpty()) {
 
+				// Upload to Cloudinary
 				Map uploadResult = cloudinary.uploader().upload(file.getBytes(),
 						ObjectUtils.asMap("folder", "smart-contact"));
 
-				// store URL in DB
 				String imageUrl = uploadResult.get("secure_url").toString();
-				String publicId = uploadResult.get("public_id").toString();
 
-				contact.setImage(imageUrl); // for display
-				// contact.setImagePublicId(publicId); // for delete/update later
+				// Save cloud image URL
+				contact.setImage(imageUrl);
 
 			} else {
-				contact.setImage("https://res.cloudinary.com/demo/image/upload/default.png");
+
+				// ✅ Default local image
+				contact.setImage("am.jpeg");
 			}
 
-			// 🔹 Set relationship
+			// 🔹 Relationship
 			contact.setUser(user);
 			user.getContacts().add(contact);
 
-			// 🔹 Save contact
+			// 🔹 Save
 			this.UserRepository.save(user);
 
-			// ✅ Success message
 			redirectAttributes.addFlashAttribute("message", new Message("Contact saved successfully!", "success"));
 
 		} catch (Exception e) {
 			e.printStackTrace();
-
-			// ❌ Error message
 			redirectAttributes.addFlashAttribute("message", new Message("Something went wrong!", "danger"));
 		}
 
