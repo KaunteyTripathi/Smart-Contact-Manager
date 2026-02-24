@@ -53,8 +53,9 @@
      <th scope="row" th:text="${'SCMUSER2026'+c.cId}"></th>
       <td > 
       
-      <img class="pic" th:src="${c.image.startsWith('http') ? c.image : '/img/' + contact.image}" alt="profile"/>
-      
+<img class="pic"
+     th:src="${c.image != null and c.image.startsWith('http') ? c.image : '/img/' + c.image}"
+     alt="profile"/>      
       
       
       <span th:text="${c.name}"></span></td>
