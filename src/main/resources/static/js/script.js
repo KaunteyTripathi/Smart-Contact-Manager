@@ -1,17 +1,12 @@
-console.log("script.js loaded");
-
 document.addEventListener("DOMContentLoaded", function () {
 
   /* =========================
      RICH TEXT EDITOR
   ========================= */
-
   const editor = document.getElementById("aboutEditor");
   const toolbar = document.querySelector(".editor-toolbar");
 
   if (editor && toolbar) {
-
-    // Handle toolbar button clicks
     toolbar.addEventListener("click", function (e) {
       const button = e.target.closest("button");
       if (!button) return;
@@ -23,7 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
       document.execCommand(command, false, null);
     });
 
-    // Handle color picker
     toolbar.addEventListener("change", function (e) {
       if (e.target.type === "color") {
         editor.focus();
@@ -35,74 +29,90 @@ document.addEventListener("DOMContentLoaded", function () {
   /* =========================
      FORM SUBMIT – SYNC EDITOR
   ========================= */
-
   const form = document.querySelector("form");
   if (form && editor) {
     form.addEventListener("submit", function () {
       const hiddenInput = document.getElementById("aboutHidden");
-      if (hiddenInput) {
-        hiddenInput.value = editor.innerHTML;
-      }
+      if (hiddenInput) hiddenInput.value = editor.innerHTML;
     });
   }
 
   /* =========================
      SPRING SECURITY LOGIN ERROR
   ========================= */
-
   const params = new URLSearchParams(window.location.search);
-  if (params.has("error")) {
-    alert("Invalid username or password");
+  if (params.has("error")) alert("Invalid username or password");
+
+  /* =========================
+     SIDEBAR TOGGLE
+  ========================= */
+  const sidebar = document.querySelector(".sidebar");
+  const toggleBtn = document.querySelector(".fa-bars");
+  const crossBtn = document.querySelector(".sidebar .cross-btn");
+  const content = document.querySelector(".content");
+
+  const openSidebar = () => {
+      sidebar.classList.remove("collapsed");
+      sidebar.classList.add("active");
+      content.classList.remove("sidebar-collapsed");
+      if (window.innerWidth <= 768) document.body.classList.add("sidebar-open");
+  };
+
+  const closeSidebar = () => {
+      sidebar.classList.add("collapsed");
+      sidebar.classList.remove("active");
+      content.classList.add("sidebar-collapsed");
+      document.body.classList.remove("sidebar-open");
+  };
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener("click", function () {
+      if (sidebar.classList.contains("collapsed")) openSidebar();
+      else closeSidebar();
+    });
   }
 
-});
+  if (crossBtn) {
+    crossBtn.addEventListener("click", closeSidebar);
+  }
 
-const toogleSidebar = () =>{
-	
-	if ($(".sidebar").is(":visible")
-	){
-		
-		$(".sidebar").css("display","none");
-		$(".content").css("margin-left","0");
-	}else{
-		
-		$(".sidebar").css("display","block");
-				$(".content").css("margin-left","20%");
-	}
-	
-}
+  document.addEventListener("click", function (e) {
+    if (window.innerWidth > 768) return;
+    if (sidebar.classList.contains("collapsed")) return;
+    if (!sidebar.contains(e.target) && e.target !== toggleBtn) closeSidebar();
+  });
 
+  sidebar.addEventListener("click", function (e) {
+    e.stopPropagation();
+  });
 
-const search = () => {
-
-    let query = $("#search-input").val();
+  /* =========================
+     SEARCH FUNCTION
+  ========================= */
+  const search = () => {
+    let query = document.getElementById("search-input").value;
 
     if (query === "") {
-        $(".search-result").hide();
-        return;
+      document.querySelector(".search-result").style.display = "none";
+      return;
     }
 
-    // ✅ Use relative URL (no localhost)
     let url = `/user/search/${query}`;
 
     fetch(url)
-        .then(response => response.json())
-        .then(data => {
+      .then(response => response.json())
+      .then(data => {
+        let text = `<div class='list-group'>`;
+        data.forEach(contact => {
+          text += `<a href='/user/contact/${contact.cId}' class='list-group-item list-group-item-action'>${contact.name}</a>`;
+        });
+        text += `</div>`;
+        const resultDiv = document.querySelector(".search-result");
+        resultDiv.innerHTML = text;
+        resultDiv.style.display = "block";
+      })
+      .catch(error => console.error(error));
+  };
 
-            let text = `<div class='list-group'>`;
-
-            data.forEach(contact => {
-                text += `
-                    <a href='/user/contact/${contact.cId}'
-                       class='list-group-item list-group-item-action'>
-                        ${contact.name}
-                    </a>`;
-            });
-
-            text += `</div>`;
-
-            $(".search-result").html(text);
-            $(".search-result").show();
-        })
-        .catch(error => console.error(error));
-};
+  window.search = search;
+});

@@ -3,98 +3,95 @@
       xmlns:th="http://www.thymeleaf.org"
       th:replace="li/base::Layout(~{::section})">
 <head>
-<title>hii</title>
+    <title>View Contacts</title>
 </head>
 
 <body>
 <section>
-<div class="bg-bubbles">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
+    <!-- Floating bubbles -->
+    <div class="bg-bubbles">
+        <span></span><span></span><span></span><span></span><span></span>
+    </div>
 
+    <div class="card mr-5">
+        <div class="card-body">
+            <h1 class="text-center">Your Contacts</h1>
+        </div>
 
-<div class="card mr-5">
-<div class="card-body">
-
-
-<h1 class="text-center"> Your Contacts</h1></div>
-
-<!-- Search box -->
+        <!-- Search box -->
         <div class="search-container my-4">
             <input onkeyup="search()" id="search-input" type="text" class="form-control" placeholder="Search your contacts" />
             <div class="search-result"></div>
         </div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Contact Id</th>
-      <th scope="col">Name</th>
-      <th scope="col">Second Name</th>
-      <th scope="col">Work</th>
-      <th scope="col">Email</th>
-      <th scope="col">Phone</th>
-      <!-- <th scope="col">Image</th> -->
-      <!--<th scope="col">Description</th>-->
-      
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-  
-  
-    <tr th:each="c, stat : ${contacts}">	
-    <!--<th scope="row" th:text="${stat.count}"></th>-->
-    
-     <th scope="row" th:text="${'SCMUSER2026'+c.cId}"></th>
-      <td > 
-      
-<img class="pic"
-     th:src="${c.image != null and c.image.startsWith('http') ? c.image : '/img/' + c.image}"
-     alt="profile"/>      
-      
-      
-      <span th:text="${c.name}"></span></td>
-      <td th:text="${c.secondName}">Otto</td>
-      <td th:text="${c.work}">@mdo</td>
-      <td ><a href="#" th:href="@{'/user/contact/'+${c.cId}}"> 
-      <span  th:text="${c.email}">  </span>
-      
-      </a></td>
-      <td th:text="${c.Phone}">Otto</td>
-      <!--<td th:text="${c.image}">Mark</td>-->
-    <!--  <td th:text="${c.description}">Otto</td>-->
-      <td><a href="#" th:onclick="|deleteContact(${c.cId})|" class="fa-solid fa-trash-can"></a> 
-      
-      <form method="post" th:action="@{'/user/update/'+${c.cId}}">  <button type="submit" class="btn btn-primary btn-sm">	update </button> </form>
-       </td>
-      
-    </tr>
-    
-  </tbody>
-</table>
+        <!-- Responsive Table Wrapper -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Contact Id</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Second Name</th>
+                        <th scope="col">Work</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="c, stat : ${contacts}">
+                        <th scope="row" th:text="${'SCMUSER2026'+c.cId}"></th>
+                        <td>
+                            <img class="pic"
+                                 th:src="${c.image != null and c.image.startsWith('http') ? c.image : '/img/' + c.image}"
+                                 alt="profile"/>
+                            <span th:text="${c.name}"></span>
+                        </td>
+                        <td th:text="${c.secondName}"></td>
+                        <td th:text="${c.work}"></td>
+                        <td>
+                            <a th:href="@{'/user/contact/'+${c.cId}}">
+                                <span th:text="${c.email}"></span>
+                            </a>
+                        </td>
+                        <td th:text="${c.phone}"></td>
+                        <td>
+    <!-- Delete Button -->
+    <form method="post" th:action="@{'/user/delete/'+${c.cId}}" style="margin-bottom:5px; width:100%;">
+        <button type="submit" class="btn btn-danger btn-sm w-100">
+            <i class="fa-solid fa-trash-can"></i> Delete
+        </button>
+    </form>
 
-<nav aria-label="Page navigation example" > 
-  <ul class="pagination">
-    <li class="page-item">
-      <a th:if="${currentPage!=0}" class="page-link" href="#"  th:href="@{'/user/viewcontact/'+${currentPage-1}} " aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li   th:classappend="${currentPage==i-1?'active':''}" th:each="i: ${#numbers.sequence(1,totalPages)}" class="page-item"><a th:href="@{'/user/viewcontact/'+${i-1}} "  class="page-link" href="#"><span th:text="${i}"></span></a></li>
-   
-    <li class="page-item">
-      <a th:if="${currentPage+1!=totalPages}" class="page-link" href="#" th:href="@{'/user/viewcontact/'+${currentPage+1}} " aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
+    <!-- Update Button -->
+    <form method="post" th:action="@{'/user/update/'+${c.cId}}" style="width:100%;">
+        <button type="submit" class="btn btn-primary btn-sm w-100">Update</button>
+    </form>
+</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-
-</div>
-</section></body></html>
+        <!-- Pagination -->
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a th:if="${currentPage!=0}" class="page-link" th:href="@{'/user/viewcontact/'+${currentPage-1}}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li th:classappend="${currentPage==i-1?'active':''}" th:each="i: ${#numbers.sequence(1,totalPages)}" class="page-item">
+                    <a th:href="@{'/user/viewcontact/'+${i-1}}" class="page-link"><span th:text="${i}"></span></a>
+                </li>
+                <li class="page-item">
+                    <a th:if="${currentPage+1!=totalPages}" class="page-link" th:href="@{'/user/viewcontact/'+${currentPage+1}}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</section>
+</body>
+</html>

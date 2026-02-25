@@ -160,7 +160,7 @@
 
     <div class="text-center profile-header">
       <img class="mini-avatar"
-           th:src="${contact.image}"
+            th:src="${contact.image != null and contact.image.startsWith('http') ? contact.image : '/img/' + contact.image}"
            alt="profile">
 
       <h5 class="mt-2 mb-0"
