@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="base::Layout(~{::section})">
+
+<body>
+<section>
+
+<div class="card">
+  <h2>Change your Password</h2>
+
+  <form class="mt-4 col-md-5"
+        th:action="@{/cp}"
+        method="post"
+        onsubmit="return validatePassword()">
+
+    <div class="mb-2">
+      <label class="form-label">New Password</label>
+      <input type="password"
+             id="newPassword"
+             name="newPassword"
+             class="form-control"
+             required>
+    </div>
+
+    <div class="mb-2">
+      <label class="form-label">Re-Type New Password</label>
+      <input type="password"
+             id="rePassword"
+             name="rePassword"
+             class="form-control"
+             required>
+    </div>
+
+    <!-- Error Message -->
+    <div id="errorMsg" style="color:red; font-size:14px;"></div>
+
+    <button class="btn btn-primary mt-2">Save</button>
+
+  </form>
+</div>
+
+<script>
+function validatePassword() {
+
+    let newPass = document.getElementById("newPassword").value;
+    let rePass = document.getElementById("rePassword").value;
+    let error = document.getElementById("errorMsg");
+
+    if (newPass !== rePass) {
+        error.innerText = "Passwords do not match!";
+        return false; // stop form submit
+    }
+
+    if (newPass.length < 6) {
+        error.innerText = "Password must be at least 6 characters!";
+        return false;
+    }
+
+    error.innerText = "";
+    return true; // allow submit
+}
+</script>
+
+</section>
+</body>
+</html>

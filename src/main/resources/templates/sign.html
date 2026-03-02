@@ -52,13 +52,17 @@
             </div>
 
             <!-- PASSWORD -->
-            <div class="mb-3 position-relative">
-              <i class="bi bi-lock form-icon"></i>
-              <input type="password" class="form-control"
-                     name="password"
-                     placeholder="Your Password"
-                     required>
-            </div>
+			<div class="mb-3 position-relative">
+			  <i class="bi bi-lock form-icon"></i>
+			  <input type="password"
+			         class="form-control"
+			         name="password"
+			         placeholder="Your Password"
+			         minlength="8"
+			         pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$"
+			         title="Password must be at least 8 characters and contain at least one letter and one number"
+			         required>
+			</div>
 
             <!-- TOOLBAR -->
             <div class="mb-2 d-flex flex-wrap gap-2 editor-toolbar"></div>
@@ -94,5 +98,5 @@
     </div>
   </div>
 
-</section>
+ </section>
 </html>

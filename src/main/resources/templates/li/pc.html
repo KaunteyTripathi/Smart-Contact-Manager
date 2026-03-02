@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="li/base::Layout(~{::section})">
+<head>
+<title>hii</title>
+</head>
+
+<body>
+<section>
+
+<div class="bg-bubbles">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div class="card">
+    <h2>Update your Contact</h2>
+
+   <form class="mt-4 col-md-5"
+      th:action="@{/user/Passchange}"
+      method="post">
+
+  <div class="card">
+    <h2>Change your Password</h2>
+
+    <div class="mb-2">
+      <label class="form-label">Old Password</label>
+      <input type="password" name="oldPassword" class="form-control">
+    </div>
+
+    <div class="mb-2">
+      <label class="form-label">New Password</label>
+      <input type="password" name="newPassword" class="form-control">
+    </div>
+
+    <button class="btn btn-primary mt-2">Save</button>
+  </div>
+</form>
+
+  </div>
+</section></body></html>

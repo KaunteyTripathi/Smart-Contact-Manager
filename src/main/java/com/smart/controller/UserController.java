@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,7 +37,8 @@ public class UserController {
 	private userRepository UserRepository;
 	@Autowired
 	private contactRepository contactRepository;
-
+	@Autowired
+	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	@Autowired
 	private Cloudinary cloudinary;
 
@@ -227,4 +229,28 @@ public class UserController {
 		model.addAttribute("user", user);
 		return "li/uprofile";
 	}
+
+	@GetMapping("/Passchange")
+	public String openPasswordChangePage() {
+		return "li/pc"; // your password change html file
+	}
+
+	@PostMapping("/Passchange")
+	public String passChange(@RequestParam("oldPassword") String oldPassword,
+			@RequestParam("newPassword") String newPassword, Principal p, Model model) {
+
+		User user = this.UserRepository.getUserByUserName(p.getName());
+
+		if (bcryptPasswordEncoder.matches(oldPassword, user.getPassword())) {
+
+			user.setPassword(bcryptPasswordEncoder.encode(newPassword));
+			this.UserRepository.save(user);
+			model.addAttribute("message", new Message("Password changed successfull", "success"));
+		} else {
+			model.addAttribute("message", new Message("Please enter correct old password", "danger"));
+		}
+
+		return "li/pc";
+	}
+
 }
